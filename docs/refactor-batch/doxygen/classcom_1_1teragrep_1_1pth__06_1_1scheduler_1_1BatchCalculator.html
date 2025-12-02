@@ -110,7 +110,7 @@ Private Attributes</h2></td></tr>
 <p>Contains the necessary operations to form a Spark batch. It consists of Archive and/or Kafka data. Each batch is constructed from a <code><a class="el" href="">RangeProcessor</a></code>, which in turn consists of multiple <code><a class="el" href="">BatchUnit</a></code>s. Each of the slices contain the actual data.</p>
 <dl class="section author"><dt>Author</dt><dd>Eemeli Hukka, Mikko Kortelainen </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="BatchCalculator_8java_source.html#l00066">66</a> of file <a class="el" href="BatchCalculator_8java_source.html">BatchCalculator.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BatchCalculator_8java_source.html#l00065">65</a> of file <a class="el" href="BatchCalculator_8java_source.html">BatchCalculator.java</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a7f3ee6e352d517bff9b926f8c9874fa7" name="a7f3ee6e352d517bff9b926f8c9874fa7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7f3ee6e352d517bff9b926f8c9874fa7">&#9670;&#160;</a></span>BatchCalculator()</h2>
@@ -144,14 +144,14 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="BatchCalculator_8java_source.html#l00073">73</a> of file <a class="el" href="BatchCalculator_8java_source.html">BatchCalculator.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   73</span>                                                                          {</div>
-<div class="line"><span class="lineno">   74</span>        this.config = <a class="code hl_variable" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#abaa613cb7394146a165eebb99288f9e6">config</a>;</div>
-<div class="line"><span class="lineno">   75</span> </div>
-<div class="line"><span class="lineno">   76</span>        this.archiveQuery = aq;</div>
-<div class="line"><span class="lineno">   77</span>        this.kafkaQuery = kq;</div>
-<div class="line"><span class="lineno">   78</span>    }</div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator_html_abaa613cb7394146a165eebb99288f9e6"><div class="ttname"><a href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#abaa613cb7394146a165eebb99288f9e6">com.teragrep.pth_06.scheduler.BatchCalculator.config</a></div><div class="ttdeci">final Config config</div><div class="ttdef"><b>Definition</b> <a href="BatchCalculator_8java_source.html#l00069">BatchCalculator.java:69</a></div></div>
+<p class="definition">Definition at line <a class="el" href="BatchCalculator_8java_source.html#l00072">72</a> of file <a class="el" href="BatchCalculator_8java_source.html">BatchCalculator.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   72</span>                                                                          {</div>
+<div class="line"><span class="lineno">   73</span>        this.config = <a class="code hl_variable" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#abaa613cb7394146a165eebb99288f9e6">config</a>;</div>
+<div class="line"><span class="lineno">   74</span> </div>
+<div class="line"><span class="lineno">   75</span>        this.archiveQuery = aq;</div>
+<div class="line"><span class="lineno">   76</span>        this.kafkaQuery = kq;</div>
+<div class="line"><span class="lineno">   77</span>    }</div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator_html_abaa613cb7394146a165eebb99288f9e6"><div class="ttname"><a href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#abaa613cb7394146a165eebb99288f9e6">com.teragrep.pth_06.scheduler.BatchCalculator.config</a></div><div class="ttdeci">final Config config</div><div class="ttdef"><b>Definition</b> <a href="BatchCalculator_8java_source.html#l00068">BatchCalculator.java:68</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -180,61 +180,41 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="BatchCalculator_8java_source.html#l00097">97</a> of file <a class="el" href="BatchCalculator_8java_source.html">BatchCalculator.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   97</span>                                                                                                {</div>
-<div class="line"><span class="lineno">   98</span> </div>
-<div class="line"><span class="lineno">   99</span>        <span class="keyword">final</span> LinkedList&lt;BatchTaskQueue&gt; runQueueArray = <span class="keyword">new</span> LinkedList&lt;&gt;();</div>
-<div class="line"><span class="lineno">  100</span> </div>
-<div class="line"><span class="lineno">  101</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_variable" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#abaa613cb7394146a165eebb99288f9e6">config</a>.batchConfig.numPartitions; i++) {</div>
-<div class="line"><span class="lineno">  102</span>            runQueueArray.add(<span class="keyword">new</span> BatchTaskQueue());</div>
-<div class="line"><span class="lineno">  103</span>        }</div>
-<div class="line"><span class="lineno">  104</span> </div>
-<div class="line"><span class="lineno">  105</span>        PriorityQueue&lt;BatchUnit&gt; batchUnitQueue = <span class="keyword">new</span> PriorityQueue&lt;&gt;(</div>
-<div class="line"><span class="lineno">  106</span>                Comparator.comparingLong(<a class="code hl_function" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchUnit.html#a8669229df9fa027d92c9a38970427a5b">BatchUnit::getSize</a>).reversed()</div>
-<div class="line"><span class="lineno">  107</span>        );</div>
+<p class="definition">Definition at line <a class="el" href="BatchCalculator_8java_source.html#l00096">96</a> of file <a class="el" href="BatchCalculator_8java_source.html">BatchCalculator.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   96</span>                                                                                                {</div>
+<div class="line"><span class="lineno">   97</span> </div>
+<div class="line"><span class="lineno">   98</span>        <span class="keyword">final</span> PriorityQueue&lt;BatchTaskQueue&gt; runQueues = <span class="keyword">new</span> PriorityQueue&lt;&gt;();</div>
+<div class="line"><span class="lineno">   99</span> </div>
+<div class="line"><span class="lineno">  100</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_variable" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#abaa613cb7394146a165eebb99288f9e6">config</a>.batchConfig.numPartitions; i++) {</div>
+<div class="line"><span class="lineno">  101</span>            runQueues.add(<span class="keyword">new</span> BatchTaskQueue());</div>
+<div class="line"><span class="lineno">  102</span>        }</div>
+<div class="line"><span class="lineno">  103</span> </div>
+<div class="line"><span class="lineno">  104</span>        PriorityQueue&lt;BatchUnit&gt; batchUnitQueue = <span class="keyword">new</span> PriorityQueue&lt;&gt;(sliceCollection);</div>
+<div class="line"><span class="lineno">  105</span> </div>
+<div class="line"><span class="lineno">  106</span>        <span class="keywordflow">while</span> (!batchUnitQueue.isEmpty()) {</div>
+<div class="line"><span class="lineno">  107</span>            BatchUnit longestObject = batchUnitQueue.poll();</div>
 <div class="line"><span class="lineno">  108</span> </div>
-<div class="line"><span class="lineno">  109</span>        batchUnitQueue.addAll(sliceCollection);</div>
-<div class="line"><span class="lineno">  110</span> </div>
-<div class="line"><span class="lineno">  111</span>        <span class="keywordflow">while</span> (!batchUnitQueue.isEmpty()) {</div>
-<div class="line"><span class="lineno">  112</span> </div>
-<div class="line"><span class="lineno">  113</span>            BatchUnit longestObject = batchUnitQueue.poll();</div>
-<div class="line"><span class="lineno">  114</span> </div>
-<div class="line"><span class="lineno">  115</span>            <span class="comment">// find shortest queue</span></div>
-<div class="line"><span class="lineno">  116</span>            BatchTaskQueue shortestQueue = <span class="keyword">null</span>;</div>
-<div class="line"><span class="lineno">  117</span>            <span class="keywordflow">for</span> (BatchTaskQueue btq : runQueueArray) {</div>
-<div class="line"><span class="lineno">  118</span>                <span class="keywordflow">if</span> (shortestQueue == <span class="keyword">null</span>) {</div>
-<div class="line"><span class="lineno">  119</span>                    shortestQueue = btq;</div>
-<div class="line"><span class="lineno">  120</span>                }</div>
-<div class="line"><span class="lineno">  121</span>                <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  122</span>                    <span class="keywordflow">if</span> (shortestQueue.getQueueTime() &gt; btq.getQueueTime()) {</div>
-<div class="line"><span class="lineno">  123</span>                        shortestQueue = btq;</div>
-<div class="line"><span class="lineno">  124</span>                    }</div>
-<div class="line"><span class="lineno">  125</span>                }</div>
-<div class="line"><span class="lineno">  126</span>            }</div>
-<div class="line"><span class="lineno">  127</span>            <span class="keywordflow">if</span> (shortestQueue != <span class="keyword">null</span>) {</div>
-<div class="line"><span class="lineno">  128</span>                shortestQueue.add(longestObject);</div>
-<div class="line"><span class="lineno">  129</span>            }</div>
-<div class="line"><span class="lineno">  130</span>            <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  131</span>                <span class="keywordflow">throw</span> <span class="keyword">new</span> RuntimeException(<span class="stringliteral">&quot;shortestQueue was null&quot;</span>);</div>
-<div class="line"><span class="lineno">  132</span>            }</div>
-<div class="line"><span class="lineno">  133</span> </div>
-<div class="line"><span class="lineno">  134</span>        }</div>
-<div class="line"><span class="lineno">  135</span> </div>
-<div class="line"><span class="lineno">  136</span>        <span class="keyword">final</span> LinkedList&lt;LinkedList&lt;BatchUnit&gt;&gt; taskSliceQueues = <span class="keyword">new</span> LinkedList&lt;&gt;();</div>
-<div class="line"><span class="lineno">  137</span> </div>
-<div class="line"><span class="lineno">  138</span>        <span class="keywordflow">for</span> (BatchTaskQueue btq : runQueueArray) {</div>
-<div class="line"><span class="lineno">  139</span>            taskSliceQueues.add(btq.getQueue());</div>
-<div class="line"><span class="lineno">  140</span>        }</div>
-<div class="line"><span class="lineno">  141</span> </div>
-<div class="line"><span class="lineno">  142</span>        <a class="code hl_variable" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#ac0766d4b10f099dfd964cea5d1d0a2d1">LOGGER</a>.debug(<span class="stringliteral">&quot;getBatch: &quot;</span> + taskSliceQueues);</div>
-<div class="line"><span class="lineno">  143</span>        <span class="keywordflow">return</span> taskSliceQueues;</div>
-<div class="line"><span class="lineno">  144</span>    }</div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator_html_ac0766d4b10f099dfd964cea5d1d0a2d1"><div class="ttname"><a href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#ac0766d4b10f099dfd964cea5d1d0a2d1">com.teragrep.pth_06.scheduler.BatchCalculator.LOGGER</a></div><div class="ttdeci">final Logger LOGGER</div><div class="ttdef"><b>Definition</b> <a href="BatchCalculator_8java_source.html#l00068">BatchCalculator.java:68</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchUnit_html_a8669229df9fa027d92c9a38970427a5b"><div class="ttname"><a href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchUnit.html#a8669229df9fa027d92c9a38970427a5b">com.teragrep.pth_06.scheduler.BatchUnit.getSize</a></div><div class="ttdeci">long getSize()</div><div class="ttdef"><b>Definition</b> <a href="BatchUnit_8java_source.html#l00084">BatchUnit.java:84</a></div></div>
+<div class="line"><span class="lineno">  109</span>            <span class="keywordflow">if</span> (!runQueues.isEmpty()) {</div>
+<div class="line"><span class="lineno">  110</span>                BatchTaskQueue shortestQueque = runQueues.poll();</div>
+<div class="line"><span class="lineno">  111</span>                shortestQueque.add(longestObject);</div>
+<div class="line"><span class="lineno">  112</span>                runQueues.add(shortestQueque);</div>
+<div class="line"><span class="lineno">  113</span>            }</div>
+<div class="line"><span class="lineno">  114</span>        }</div>
+<div class="line"><span class="lineno">  115</span> </div>
+<div class="line"><span class="lineno">  116</span>        <span class="keyword">final</span> LinkedList&lt;LinkedList&lt;BatchUnit&gt;&gt; taskSliceQueues = <span class="keyword">new</span> LinkedList&lt;&gt;();</div>
+<div class="line"><span class="lineno">  117</span> </div>
+<div class="line"><span class="lineno">  118</span>        <span class="keywordflow">for</span> (BatchTaskQueue btq : runQueues) {</div>
+<div class="line"><span class="lineno">  119</span>            taskSliceQueues.add(btq.getQueue());</div>
+<div class="line"><span class="lineno">  120</span>        }</div>
+<div class="line"><span class="lineno">  121</span> </div>
+<div class="line"><span class="lineno">  122</span>        <a class="code hl_variable" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#ac0766d4b10f099dfd964cea5d1d0a2d1">LOGGER</a>.debug(<span class="stringliteral">&quot;getBatch: &quot;</span> + taskSliceQueues);</div>
+<div class="line"><span class="lineno">  123</span>        <span class="keywordflow">return</span> taskSliceQueues;</div>
+<div class="line"><span class="lineno">  124</span>    }</div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator_html_ac0766d4b10f099dfd964cea5d1d0a2d1"><div class="ttname"><a href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#ac0766d4b10f099dfd964cea5d1d0a2d1">com.teragrep.pth_06.scheduler.BatchCalculator.LOGGER</a></div><div class="ttdeci">final Logger LOGGER</div><div class="ttdef"><b>Definition</b> <a href="BatchCalculator_8java_source.html#l00067">BatchCalculator.java:67</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator_a191421ff0d8e193afed416f9c79d2d8e_cgraph.svg" width="516" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator_a191421ff0d8e193afed416f9c79d2d8e_cgraph.svg" width="1062" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -270,31 +250,31 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="BatchCalculator_8java_source.html#l00080">80</a> of file <a class="el" href="BatchCalculator_8java_source.html">BatchCalculator.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   80</span>                                                                                    {</div>
-<div class="line"><span class="lineno">   81</span>        <a class="code hl_variable" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#ac0766d4b10f099dfd964cea5d1d0a2d1">LOGGER</a>.debug(<span class="stringliteral">&quot;processRange&quot;</span>);</div>
-<div class="line"><span class="lineno">   82</span> </div>
-<div class="line"><span class="lineno">   83</span>        LinkedList&lt;BatchUnit&gt; slice = <span class="keyword">new</span> LinkedList&lt;&gt;();</div>
-<div class="line"><span class="lineno">   84</span> </div>
-<div class="line"><span class="lineno">   85</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#abaa613cb7394146a165eebb99288f9e6">config</a>.isArchiveEnabled) {</div>
-<div class="line"><span class="lineno">   86</span>            slice.addAll(<span class="keyword">new</span> ArchiveRangeProcessor(this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#afd6281818126447ca08c311001b2b7a4">archiveQuery</a>).<a class="code hl_function" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#aa6a67f7aa8d3fd55df790568348c62fc">processRange</a>(start, end));</div>
-<div class="line"><span class="lineno">   87</span>        }</div>
-<div class="line"><span class="lineno">   88</span> </div>
-<div class="line"><span class="lineno">   89</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#abaa613cb7394146a165eebb99288f9e6">config</a>.isKafkaEnabled) {</div>
-<div class="line"><span class="lineno">   90</span>            slice.addAll(<span class="keyword">new</span> KafkaRangeProcessor(this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#a5a45f4ae4a29d9f1e7efc24424d67a21">kafkaQuery</a>).<a class="code hl_function" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#aa6a67f7aa8d3fd55df790568348c62fc">processRange</a>(start, end));</div>
-<div class="line"><span class="lineno">   91</span>        }</div>
-<div class="line"><span class="lineno">   92</span> </div>
-<div class="line"><span class="lineno">   93</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#a191421ff0d8e193afed416f9c79d2d8e">buildBatch</a>(slice);</div>
-<div class="line"><span class="lineno">   94</span> </div>
-<div class="line"><span class="lineno">   95</span>    }</div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator_html_a191421ff0d8e193afed416f9c79d2d8e"><div class="ttname"><a href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#a191421ff0d8e193afed416f9c79d2d8e">com.teragrep.pth_06.scheduler.BatchCalculator.buildBatch</a></div><div class="ttdeci">LinkedList&lt; LinkedList&lt; BatchUnit &gt; &gt; buildBatch(LinkedList&lt; BatchUnit &gt; sliceCollection)</div><div class="ttdef"><b>Definition</b> <a href="BatchCalculator_8java_source.html#l00097">BatchCalculator.java:97</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator_html_a5a45f4ae4a29d9f1e7efc24424d67a21"><div class="ttname"><a href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#a5a45f4ae4a29d9f1e7efc24424d67a21">com.teragrep.pth_06.scheduler.BatchCalculator.kafkaQuery</a></div><div class="ttdeci">final KafkaQuery kafkaQuery</div><div class="ttdef"><b>Definition</b> <a href="BatchCalculator_8java_source.html#l00071">BatchCalculator.java:71</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator_html_aa6a67f7aa8d3fd55df790568348c62fc"><div class="ttname"><a href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#aa6a67f7aa8d3fd55df790568348c62fc">com.teragrep.pth_06.scheduler.BatchCalculator.processRange</a></div><div class="ttdeci">LinkedList&lt; LinkedList&lt; BatchUnit &gt; &gt; processRange(Offset start, Offset end)</div><div class="ttdef"><b>Definition</b> <a href="BatchCalculator_8java_source.html#l00080">BatchCalculator.java:80</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator_html_afd6281818126447ca08c311001b2b7a4"><div class="ttname"><a href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#afd6281818126447ca08c311001b2b7a4">com.teragrep.pth_06.scheduler.BatchCalculator.archiveQuery</a></div><div class="ttdeci">final ArchiveQuery archiveQuery</div><div class="ttdef"><b>Definition</b> <a href="BatchCalculator_8java_source.html#l00070">BatchCalculator.java:70</a></div></div>
+<p class="definition">Definition at line <a class="el" href="BatchCalculator_8java_source.html#l00079">79</a> of file <a class="el" href="BatchCalculator_8java_source.html">BatchCalculator.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   79</span>                                                                                    {</div>
+<div class="line"><span class="lineno">   80</span>        <a class="code hl_variable" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#ac0766d4b10f099dfd964cea5d1d0a2d1">LOGGER</a>.debug(<span class="stringliteral">&quot;processRange&quot;</span>);</div>
+<div class="line"><span class="lineno">   81</span> </div>
+<div class="line"><span class="lineno">   82</span>        LinkedList&lt;BatchUnit&gt; slice = <span class="keyword">new</span> LinkedList&lt;&gt;();</div>
+<div class="line"><span class="lineno">   83</span> </div>
+<div class="line"><span class="lineno">   84</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#abaa613cb7394146a165eebb99288f9e6">config</a>.isArchiveEnabled) {</div>
+<div class="line"><span class="lineno">   85</span>            slice.addAll(<span class="keyword">new</span> ArchiveRangeProcessor(this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#afd6281818126447ca08c311001b2b7a4">archiveQuery</a>).<a class="code hl_function" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#aa6a67f7aa8d3fd55df790568348c62fc">processRange</a>(start, end));</div>
+<div class="line"><span class="lineno">   86</span>        }</div>
+<div class="line"><span class="lineno">   87</span> </div>
+<div class="line"><span class="lineno">   88</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#abaa613cb7394146a165eebb99288f9e6">config</a>.isKafkaEnabled) {</div>
+<div class="line"><span class="lineno">   89</span>            slice.addAll(<span class="keyword">new</span> KafkaRangeProcessor(this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#a5a45f4ae4a29d9f1e7efc24424d67a21">kafkaQuery</a>).<a class="code hl_function" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#aa6a67f7aa8d3fd55df790568348c62fc">processRange</a>(start, end));</div>
+<div class="line"><span class="lineno">   90</span>        }</div>
+<div class="line"><span class="lineno">   91</span> </div>
+<div class="line"><span class="lineno">   92</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#a191421ff0d8e193afed416f9c79d2d8e">buildBatch</a>(slice);</div>
+<div class="line"><span class="lineno">   93</span> </div>
+<div class="line"><span class="lineno">   94</span>    }</div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator_html_a191421ff0d8e193afed416f9c79d2d8e"><div class="ttname"><a href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#a191421ff0d8e193afed416f9c79d2d8e">com.teragrep.pth_06.scheduler.BatchCalculator.buildBatch</a></div><div class="ttdeci">LinkedList&lt; LinkedList&lt; BatchUnit &gt; &gt; buildBatch(LinkedList&lt; BatchUnit &gt; sliceCollection)</div><div class="ttdef"><b>Definition</b> <a href="BatchCalculator_8java_source.html#l00096">BatchCalculator.java:96</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator_html_a5a45f4ae4a29d9f1e7efc24424d67a21"><div class="ttname"><a href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#a5a45f4ae4a29d9f1e7efc24424d67a21">com.teragrep.pth_06.scheduler.BatchCalculator.kafkaQuery</a></div><div class="ttdeci">final KafkaQuery kafkaQuery</div><div class="ttdef"><b>Definition</b> <a href="BatchCalculator_8java_source.html#l00070">BatchCalculator.java:70</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator_html_aa6a67f7aa8d3fd55df790568348c62fc"><div class="ttname"><a href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#aa6a67f7aa8d3fd55df790568348c62fc">com.teragrep.pth_06.scheduler.BatchCalculator.processRange</a></div><div class="ttdeci">LinkedList&lt; LinkedList&lt; BatchUnit &gt; &gt; processRange(Offset start, Offset end)</div><div class="ttdef"><b>Definition</b> <a href="BatchCalculator_8java_source.html#l00079">BatchCalculator.java:79</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator_html_afd6281818126447ca08c311001b2b7a4"><div class="ttname"><a href="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator.html#afd6281818126447ca08c311001b2b7a4">com.teragrep.pth_06.scheduler.BatchCalculator.archiveQuery</a></div><div class="ttdeci">final ArchiveQuery archiveQuery</div><div class="ttdef"><b>Definition</b> <a href="BatchCalculator_8java_source.html#l00069">BatchCalculator.java:69</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator_aa6a67f7aa8d3fd55df790568348c62fc_cgraph.svg" width="791" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classcom_1_1teragrep_1_1pth__06_1_1scheduler_1_1BatchCalculator_aa6a67f7aa8d3fd55df790568348c62fc_cgraph.svg" width="1336" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -325,7 +305,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="BatchCalculator_8java_source.html#l00070">70</a> of file <a class="el" href="BatchCalculator_8java_source.html">BatchCalculator.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BatchCalculator_8java_source.html#l00069">69</a> of file <a class="el" href="BatchCalculator_8java_source.html">BatchCalculator.java</a>.</p>
 
 </div>
 </div>
@@ -349,7 +329,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="BatchCalculator_8java_source.html#l00069">69</a> of file <a class="el" href="BatchCalculator_8java_source.html">BatchCalculator.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BatchCalculator_8java_source.html#l00068">68</a> of file <a class="el" href="BatchCalculator_8java_source.html">BatchCalculator.java</a>.</p>
 
 </div>
 </div>
@@ -373,7 +353,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="BatchCalculator_8java_source.html#l00071">71</a> of file <a class="el" href="BatchCalculator_8java_source.html">BatchCalculator.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BatchCalculator_8java_source.html#l00070">70</a> of file <a class="el" href="BatchCalculator_8java_source.html">BatchCalculator.java</a>.</p>
 
 </div>
 </div>
@@ -397,7 +377,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="BatchCalculator_8java_source.html#l00068">68</a> of file <a class="el" href="BatchCalculator_8java_source.html">BatchCalculator.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BatchCalculator_8java_source.html#l00067">67</a> of file <a class="el" href="BatchCalculator_8java_source.html">BatchCalculator.java</a>.</p>
 
 </div>
 </div>
