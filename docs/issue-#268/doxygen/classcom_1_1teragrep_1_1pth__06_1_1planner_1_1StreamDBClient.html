@@ -196,7 +196,7 @@ Ville Manninen </dd></dl>
 <div class="line"><span class="lineno">  138</span>            settings.withExecuteLogging(<span class="keyword">true</span>);</div>
 <div class="line"><span class="lineno">  139</span>        }</div>
 <div class="line"><span class="lineno">  140</span> </div>
-<div class="line"><span class="lineno">  141</span>        System.getProperties().setProperty(<span class="stringliteral">&quot;org.jooq.no-logo&quot;</span>, <span class="stringliteral">&quot;true&quot;</span>); <span class="comment">// TODO configure from SQLConfig</span></div>
+<div class="line"><span class="lineno">  141</span>        System.getProperties().setProperty(<span class="stringliteral">&quot;org.jooq.no-logo&quot;</span>, <span class="stringliteral">&quot;true&quot;</span>);</div>
 <div class="line"><span class="lineno">  142</span>        <span class="keyword">final</span> Connection connection = DriverManager.getConnection(url, userName, password);</div>
 <div class="line"><span class="lineno">  143</span>        this.ctx = DSL.using(connection, SQLDialect.MYSQL, settings);</div>
 <div class="line"><span class="lineno">  144</span>        this.filterTable = <span class="keyword">new</span> GetArchivedObjectsFilterTable(<a class="code hl_variable" href="classcom_1_1teragrep_1_1pth__06_1_1planner_1_1StreamDBClient.html#a3386373482cb1885a93ed7bed49432b8">ctx</a>, <a class="code hl_variable" href="classcom_1_1teragrep_1_1pth__06_1_1planner_1_1StreamDBClient.html#a2f3310d859a72366be2b1016414b3d01">isDebugEnabled</a>, <a class="code hl_variable" href="classcom_1_1teragrep_1_1pth__06_1_1planner_1_1StreamDBClient.html#a16bad348cfb2599665c6c7908b3a9969">isLogSQL</a>);</div>
